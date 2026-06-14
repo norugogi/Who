@@ -752,16 +752,65 @@
     const GUILD_JSON = "Who_are_you_guild.json";
 
     const SERVER_MAP = {
-      A:{name:"론도01",world:"2-1"}, B:{name:"론도02",world:"2-2"}, C:{name:"론도03",world:"2-3"}, D:{name:"론도04",world:"2-4"}, E:{name:"론도05",world:"2-5"},
-      F:{name:"라인소프01",world:"3-1"}, G:{name:"라인소프02",world:"3-2"}, H:{name:"라인소프03",world:"3-3"}, I:{name:"라인소프04",world:"3-4"}, J:{name:"라인소프05",world:"3-5"},
-      K:{name:"아민타01",world:"5-1"}, L:{name:"아민타02",world:"5-2"}, M:{name:"아민타03",world:"5-3"}, N:{name:"아민타04",world:"5-4"}, O:{name:"아민타05",world:"5-5"},
-      P:{name:"가리안01",world:"8-1"}, Q:{name:"가리안02",world:"8-2"}, R:{name:"가리안03",world:"8-3"}, S:{name:"가리안04",world:"8-4"}, T:{name:"가리안05",world:"8-5"},
-      U:{name:"사도바01",world:"10-1"}, V:{name:"사도바02",world:"10-2"}, W:{name:"사도바03",world:"10-3"}, X:{name:"사도바04",world:"10-4"}, Y:{name:"사도바05",world:"10-5"},
-      Z:{name:"제롬01",world:"11-1"}, AA:{name:"제롬02",world:"11-2"}, AB:{name:"제롬03",world:"11-3"}, AC:{name:"제롬04",world:"11-4"}, AD:{name:"제롬05",world:"11-5"},
-      AE:{name:"아티산01",world:"12-1"}, AF:{name:"아티산02",world:"12-2"}, AG:{name:"아티산03",world:"12-3"}, AH:{name:"아티산04",world:"12-4"}, AI:{name:"아티산05",world:"12-5"},
-      AJ:{name:"나세르01",world:"14-1"}, AK:{name:"나세르02",world:"14-2"}, AL:{name:"나세르03",world:"14-3"}, AM:{name:"나세르04",world:"14-4"}, AN:{name:"나세르05",world:"14-5"},
-      AO:{name:"타리아01",world:"16-1"}, AP:{name:"타리아02",world:"16-2"}, AQ:{name:"타리아03",world:"16-3"}, AR:{name:"타리아04",world:"16-4"}, AS:{name:"타리아05",world:"16-5"},
-      AT:{name:"메르비스01",world:"27-1"}, AU:{name:"메르비스02",world:"27-2"}, AV:{name:"메르비스03",world:"27-3"}, AW:{name:"메르비스04",world:"27-4"}, AX:{name:"메르비스05",world:"27-5"}
+      A:  { name: "론도01", world: "2-1" },
+      B:  { name: "론도02", world: "2-2" },
+      C:  { name: "론도03", world: "2-3" },
+      D:  { name: "론도04", world: "2-4" },
+      E:  { name: "론도05", world: "2-5" },
+
+      F:  { name: "라인소프01", world: "3-1" },
+      G:  { name: "라인소프02", world: "3-2" },
+      H:  { name: "라인소프03", world: "3-3" },
+      I:  { name: "라인소프04", world: "3-4" },
+      J:  { name: "라인소프05", world: "3-5" },
+
+      K:  { name: "아민타01", world: "5-1" },
+      L:  { name: "아민타02", world: "5-2" },
+      M:  { name: "아민타03", world: "5-3" },
+      N:  { name: "아민타04", world: "5-4" },
+      O:  { name: "아민타05", world: "5-5" },
+
+      P:  { name: "가리안01", world: "8-1" },
+      Q:  { name: "가리안02", world: "8-2" },
+      R:  { name: "가리안03", world: "8-3" },
+      S:  { name: "가리안04", world: "8-4" },
+      T:  { name: "가리안05", world: "8-5" },
+
+      U: { name: "타리아01", world: "16-1" },
+      V: { name: "타리아02", world: "16-2" },
+      W: { name: "타리아03", world: "16-3" },
+      X: { name: "타리아04", world: "16-4" },
+      Y: { name: "타리아05", world: "16-5" },
+
+      Z:  { name: "제롬01", world: "11-1" },
+      AA: { name: "제롬02", world: "11-2" },
+      AB: { name: "제롬03", world: "11-3" },
+      AC: { name: "제롬04", world: "11-4" },
+      AD: { name: "제롬05", world: "11-5" },
+
+      AE: { name: "나세르01", world: "14-1" },
+      AF: { name: "나세르02", world: "14-2" },
+      AG: { name: "나세르03", world: "14-3" },
+      AH: { name: "나세르04", world: "14-4" },
+      AI: { name: "나세르05", world: "14-5" },
+
+      AJ:  { name: "사도바01", world: "10-1" },
+      AK:  { name: "사도바02", world: "10-2" },
+      AL:  { name: "사도바03", world: "10-3" },
+      AM:  { name: "사도바04", world: "10-4" },
+      AN:  { name: "사도바05", world: "10-5" },
+
+      AO: { name: "아티산01", world: "12-1" },
+      AP: { name: "아티산02", world: "12-2" },
+      AQ: { name: "아티산03", world: "12-3" },
+      AR: { name: "아티산04", world: "12-4" },
+      AS: { name: "아티산05", world: "12-5" },
+
+      AT: { name: "메르비스01", world: "27-1" },
+      AU: { name: "메르비스02", world: "27-2" },
+      AV: { name: "메르비스03", world: "27-3" },
+      AW: { name: "메르비스04", world: "27-4" },
+      AX: { name: "메르비스05", world: "27-5" }
     };
 
     const WORLD_TO_SERVER = Object.fromEntries(
