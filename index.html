@@ -12,7 +12,6 @@
     :root {
       --bg: #171817;
       --panel: #20211f;
-      --panel-deep: #151614;
       --line: #4a493f;
       --line-gold: #6d6248;
       --gold: #c8ad6e;
@@ -20,58 +19,44 @@
       --text: #f0ede5;
       --text-soft: #bdb8ac;
       --danger: #e0a18c;
-      --shadow: rgba(0, 0, 0, 0.45);
       --row: #20221f;
       --row-hover: #2b2d29;
       --selected-a: #6d5b34;
       --selected-b: #54492f;
+      --modal-bg: #191a18;
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
-    html,
-    body {
+    html, body {
       margin: 0;
       min-height: 100%;
       background:
-        linear-gradient(rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.38)),
+        linear-gradient(rgba(0,0,0,.18), rgba(0,0,0,.38)),
         radial-gradient(circle at 50% 0%, #3a3b36 0%, #1d1e1c 48%, #111210 100%);
       color: var(--text);
       font-family: "Noto Sans KR", "Malgun Gothic", sans-serif;
       font-size: 16px;
       text-rendering: optimizeLegibility;
       -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
     }
 
-    body {
-      padding: 14px 1cm;
-    }
-
-    button,
-    input {
-      font: inherit;
-    }
+    body { padding: 14px 1cm; }
+    button, input, select { font: inherit; }
 
     .app {
       width: 100%;
       min-height: calc(100vh - 28px);
-      margin: 0 auto;
       border: 1px solid #3c3b35;
-      background: rgba(18, 19, 17, 0.94);
-      box-shadow: 0 18px 45px var(--shadow);
+      background: rgba(18,19,17,.94);
+      box-shadow: 0 18px 45px rgba(0,0,0,.45);
     }
 
     .topbar {
       position: relative;
-      min-height: 138px;
       padding: 18px 26px 20px;
       border-bottom: 1px solid #3b3931;
-      background:
-        linear-gradient(90deg, rgba(34, 35, 32, 0.96), rgba(26, 27, 25, 0.88)),
-        radial-gradient(circle at 60% 20%, rgba(255, 255, 255, 0.04), transparent 35%);
+      background: linear-gradient(90deg, rgba(34,35,32,.96), rgba(26,27,25,.88));
     }
 
     .topbar::after {
@@ -82,21 +67,17 @@
       left: 0;
       height: 1px;
       background: linear-gradient(90deg, transparent, var(--gold), transparent);
-      opacity: 0.7;
+      opacity: .7;
     }
 
     .title-row {
       display: flex;
-      align-items: flex-start;
       justify-content: space-between;
+      align-items: flex-start;
       gap: 20px;
     }
 
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
+    .brand { display: flex; align-items: center; gap: 14px; }
 
     .brand-mark {
       display: grid;
@@ -104,12 +85,10 @@
       height: 42px;
       place-items: center;
       border: 1px solid var(--gold);
-      background:
-        linear-gradient(135deg, rgba(230, 205, 137, 0.2), rgba(70, 55, 28, 0.15)),
-        #1b1c1a;
+      background: #1b1c1a;
       color: var(--gold-bright);
       font-size: 22px;
-      box-shadow: inset 0 0 0 3px rgba(0, 0, 0, 0.25);
+      box-shadow: inset 0 0 0 3px rgba(0,0,0,.25);
     }
 
     h1 {
@@ -119,11 +98,7 @@
       letter-spacing: 1px;
     }
 
-    .subtitle {
-      margin-top: 5px;
-      color: #c8c3b8;
-      font-size: 14px;
-    }
+    .subtitle { margin-top: 5px; color: #c8c3b8; font-size: 14px; }
 
     .update {
       color: var(--text-soft);
@@ -132,71 +107,95 @@
       text-align: right;
     }
 
-    .update strong {
-      color: var(--gold-bright);
-      font-weight: 600;
+    .update strong { color: var(--gold-bright); }
+    .update .error { color: var(--danger); }
+
+    .search-area {
+      display: grid;
+      grid-template-columns: minmax(480px, 1fr) minmax(420px, .9fr);
+      gap: 18px;
+      margin-top: 16px;
     }
 
-    .update .error {
-      color: var(--danger);
+    .search-block {
+      padding: 12px;
+      border: 1px solid #454239;
+      background: rgba(19,20,18,.72);
     }
 
-    .searchbar {
+    .search-title {
+      margin-bottom: 9px;
+      color: #e6decc;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .search-line {
       display: flex;
-      min-height: 38px;
       align-items: center;
       gap: 10px;
-      margin-top: 16px;
       flex-wrap: wrap;
     }
 
-    .searchbar label {
-      margin-right: 4px;
+    .search-line label {
       color: #e8e1d1;
       font-size: 14px;
       font-weight: 600;
     }
 
-    .code-input {
-      width: 130px;
+    .text-input {
       height: 38px;
       padding: 0 12px;
       border: 1px solid #736649;
       outline: none;
       background: #111210;
       color: var(--gold-bright);
-      font-weight: 700;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.6);
+      box-shadow: inset 0 0 8px rgba(0,0,0,.6);
     }
 
-    .code-input:focus {
-      border-color: var(--gold-bright);
+    .code-input {
+      width: 130px;
+      text-transform: uppercase;
+      font-weight: 700;
+      letter-spacing: 2px;
+    }
+
+    .guild-search-input {
+      width: min(280px, 100%);
+      color: #f4efe5;
+    }
+
+    .text-input:focus { border-color: var(--gold-bright); }
+
+    .game-btn, .small-btn {
+      border: 1px solid #856d42;
+      background: linear-gradient(#5f4b30, #382b1d);
+      color: #eee4c9;
+      font-weight: 700;
+      cursor: pointer;
     }
 
     .game-btn {
       min-width: 92px;
       height: 38px;
       padding: 0 18px;
-      border: 1px solid #856d42;
-      background: linear-gradient(#5f4b30, #382b1d);
-      color: #eee4c9;
-      font-weight: 700;
-      cursor: pointer;
-      box-shadow:
-        inset 0 1px rgba(255, 255, 255, 0.08),
-        0 1px 0 rgba(0, 0, 0, 0.8);
     }
 
-    .game-btn:hover {
+    .small-btn {
+      min-width: 62px;
+      height: 32px;
+      padding: 0 12px;
+      font-size: 13px;
+    }
+
+    .game-btn:hover, .small-btn:hover {
       background: linear-gradient(#71593a, #433322);
       color: #fff;
     }
 
     .server-result {
-      display: flex;
       min-height: 38px;
+      display: flex;
       align-items: center;
       padding: 0 14px;
       border-left: 1px solid var(--line-gold);
@@ -217,31 +216,27 @@
       font-size: 13px;
     }
 
-    .content {
-      padding: 16px;
-    }
+    .content { padding: 16px; }
 
     .main-grid {
       display: grid;
-      grid-template-columns: 430px minmax(0, 1fr);
+      grid-template-columns: 430px minmax(0,1fr);
       gap: 14px;
     }
 
     .panel {
       min-width: 0;
       border: 1px solid #4c483b;
-      background:
-        linear-gradient(rgba(255, 255, 255, 0.015), rgba(255, 255, 255, 0)),
-        rgba(29, 30, 28, 0.96);
-      box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.25);
+      background: rgba(29,30,28,.96);
     }
 
     .panel-header {
       display: flex;
-      height: 46px;
+      min-height: 46px;
       align-items: center;
       justify-content: space-between;
-      padding: 0 14px;
+      gap: 14px;
+      padding: 7px 14px;
       border-bottom: 1px solid var(--line-gold);
       background: linear-gradient(90deg, #292a27, #1c1d1b);
     }
@@ -255,48 +250,46 @@
     }
 
     .panel-title::before {
+      content: "";
       width: 4px;
       height: 18px;
       background: var(--gold);
-      content: "";
-      box-shadow: 0 0 8px rgba(205, 177, 109, 0.22);
     }
 
-    .panel-note {
-      color: #bfb9ad;
+    .panel-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #c8c2b7;
       font-size: 12px;
     }
 
-    .guild-list {
-      padding: 8px;
+    .rank-limit {
+      height: 32px;
+      padding: 0 28px 0 10px;
+      border: 1px solid #756747;
+      background: #24251f;
+      color: #eadfbf;
+      outline: none;
     }
+
+    .guild-list { padding: 8px; }
 
     .guild-row {
       display: grid;
       min-height: 72px;
-      grid-template-columns: 50px minmax(0, 1fr) 108px 82px;
+      grid-template-columns: 50px minmax(0,1fr) 108px 82px;
       align-items: center;
       padding: 8px 10px;
       margin-bottom: 6px;
       border: 1px solid #46443d;
       background: linear-gradient(90deg, #3a3a36, #2b2c29);
       cursor: pointer;
-      transition: 0.15s ease;
-    }
-
-    .guild-row:last-child {
-      margin-bottom: 0;
-    }
-
-    .guild-row:hover {
-      border-color: #8c794f;
-      filter: brightness(1.06);
     }
 
     .guild-row.selected {
       border-color: #9c875b;
       background: linear-gradient(90deg, #766747, #5b4f36);
-      box-shadow: inset 0 0 0 1px rgba(238, 211, 143, 0.16);
     }
 
     .guild-rank {
@@ -306,24 +299,15 @@
       text-align: center;
     }
 
-    .guild-row:nth-child(1) .guild-rank {
-      color: #f0d888;
-    }
-
-    .guild-row:nth-child(2) .guild-rank {
-      color: #c9c9c4;
-    }
-
-    .guild-row:nth-child(3) .guild-rank {
-      color: #c98f61;
-    }
+    .guild-row:nth-child(1) .guild-rank { color: #f0d888; }
+    .guild-row:nth-child(2) .guild-rank { color: #c9c9c4; }
+    .guild-row:nth-child(3) .guild-rank { color: #c98f61; }
 
     .guild-name {
       overflow: hidden;
       color: #fffaf0;
       font-size: 18px;
       font-weight: 600;
-      line-height: 1.4;
       text-overflow: ellipsis;
       white-space: nowrap;
     }
@@ -333,8 +317,6 @@
       margin-top: 7px;
       color: #f2ede3;
       font-size: 15px;
-      font-weight: 400;
-      line-height: 1.5;
       text-overflow: ellipsis;
       white-space: nowrap;
     }
@@ -353,14 +335,6 @@
       color: #e8dfcf;
       font-size: 13px;
       font-weight: 600;
-      line-height: 1.35;
-    }
-
-    .empty-guild {
-      padding: 28px 14px;
-      color: var(--text-soft);
-      font-size: 14px;
-      text-align: center;
     }
 
     .ranking-controls {
@@ -385,11 +359,6 @@
       cursor: pointer;
     }
 
-    .tab:hover {
-      border-color: #77694c;
-      color: #ddd6c5;
-    }
-
     .tab.active {
       border-color: #9a8455;
       background: linear-gradient(#51452f, #342d20);
@@ -398,8 +367,8 @@
 
     .filter-row {
       display: flex;
-      align-items: center;
       justify-content: space-between;
+      align-items: center;
       gap: 14px;
       margin-top: 10px;
       flex-wrap: wrap;
@@ -413,9 +382,7 @@
       font-size: 13px;
     }
 
-    .toggle input {
-      accent-color: #b89b5d;
-    }
+    .toggle input { accent-color: #b89b5d; }
 
     .legend {
       display: flex;
@@ -429,20 +396,15 @@
       width: 8px;
       height: 8px;
       margin-right: 4px;
-      border: 1px solid rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255,255,255,.15);
     }
 
-    .legend .selected {
-      background: #6f5b31;
-    }
-
-    .legend .candidate {
-      background: #7b4b3e;
-    }
+    .legend .selected { background: #6f5b31; }
+    .legend .candidate { background: #7b4b3e; }
 
     .table-wrap {
       overflow: auto;
-      max-height: 640px;
+      max-height: 690px;
     }
 
     table {
@@ -473,93 +435,49 @@
       background: var(--row);
       color: #f0ece2;
       font-size: 15px;
-      font-weight: 400;
-      line-height: 1.45;
       text-overflow: ellipsis;
       white-space: nowrap;
     }
 
-    tbody tr:nth-child(even) td {
-      background: var(--row);
-    }
-
-    tbody tr:hover td {
-      border-bottom-color: #55564d;
-      background: var(--row-hover);
-    }
+    tbody tr:hover td { background: var(--row-hover); }
 
     tbody tr.selected-guild td {
-      border-bottom-color: #7a6946;
       background: linear-gradient(90deg, var(--selected-a), var(--selected-b));
       color: #fffaf0;
     }
 
-    tbody tr.selected-guild:hover td {
-      border-bottom-color: #806f4e;
-      background: linear-gradient(90deg, #705f39, #554a31);
-    }
-
-    .center {
-      text-align: center;
-    }
+    .center { text-align: center; }
 
     .player-name {
       color: #faf7f0;
       font-size: 16px;
       font-weight: 500;
-      line-height: 1.45;
     }
 
-    tbody tr.selected-guild .player-name {
-      color: #fff3c4;
-      font-weight: 600;
+    .guild-badge, .candidate-badge {
+      display: inline-block;
+      min-width: 72px;
+      padding: 5px 10px;
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 1.2;
+      text-align: center;
     }
 
     .guild-badge {
-      display: inline-block;
-      min-width: 72px;
-      padding: 5px 10px;
       border: 1px solid #8a7448;
       background: #2d2a20;
       color: #f0d99a;
-      font-size: 14px;
-      font-weight: 500;
-      line-height: 1.2;
-      text-align: center;
     }
 
     .candidate-badge {
-      display: inline-block;
-      min-width: 72px;
-      padding: 5px 10px;
       border: 1px solid #9a604d;
       background: #3c2721;
       color: #f3c9b8;
-      font-size: 14px;
-      font-weight: 500;
-      line-height: 1.2;
-      text-align: center;
     }
 
-    tbody td:nth-child(1) {
-      padding-right: 0;
-      padding-left: 0;
-      font-weight: 600;
-      text-align: center;
-    }
-
-    tbody td:nth-child(2) {
-      padding-right: 14px;
-      padding-left: 14px;
-    }
-
-    tbody td:nth-child(3),
-    tbody td:nth-child(4) {
-      font-weight: 400;
-    }
-
-    .empty-row td {
-      height: 120px;
+    .empty-row td, .empty-guild {
+      padding: 28px 14px;
       color: var(--text-soft);
       text-align: center;
     }
@@ -569,60 +487,95 @@
       justify-content: space-between;
       gap: 14px;
       margin-top: 14px;
-      padding: 0 2px;
       color: #94918a;
       font-size: 11px;
     }
 
+    .modal-backdrop {
+      position: fixed;
+      z-index: 50;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background: rgba(0,0,0,.72);
+    }
+
+    .modal-backdrop.open { display: flex; }
+
+    .modal {
+      width: min(1180px, 96vw);
+      max-height: 88vh;
+      overflow: hidden;
+      border: 1px solid #7c6b49;
+      background: var(--modal-bg);
+      box-shadow: 0 20px 70px rgba(0,0,0,.7);
+    }
+
+    .modal.small { width: min(980px, 96vw); }
+
+    .modal-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 14px 16px;
+      border-bottom: 1px solid #685c43;
+      background: linear-gradient(90deg, #302d25, #1d1e1b);
+    }
+
+    .modal-title {
+      color: #f0e7d3;
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .modal-close {
+      width: 34px;
+      height: 34px;
+      border: 1px solid #6a6049;
+      background: #24241f;
+      color: #ddd5c6;
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    .modal-body {
+      max-height: calc(88vh - 62px);
+      overflow: auto;
+      padding: 14px;
+    }
+
+    .modal-note {
+      margin-top: 10px;
+      color: #9f9c94;
+      font-size: 11px;
+    }
+
+    .modal-table th, .modal-table td {
+      text-align: center;
+    }
+
+    .modal-table td {
+      height: 48px;
+    }
+
     @media (max-width: 1180px) {
-      .main-grid {
-        grid-template-columns: 1fr;
-      }
+      .main-grid { grid-template-columns: 1fr; }
+      .search-area { grid-template-columns: 1fr; }
     }
 
     @media (max-width: 760px) {
-      body {
-        padding: 0;
-      }
-
-      .app {
-        min-height: 100vh;
-        border: 0;
-      }
-
-      .topbar {
-        padding: 16px;
-      }
-
-      .title-row {
-        flex-direction: column;
-      }
-
-      .update {
-        text-align: left;
-      }
-
-      .content {
-        padding: 10px;
-      }
-
-      .guild-row {
-        grid-template-columns: 42px minmax(0, 1fr) 90px 68px;
-      }
-
-      .tabs {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .tab {
-        width: 100%;
-        min-width: 0;
-      }
-
-      .footer {
-        flex-direction: column;
-      }
+      body { padding: 0; }
+      .title-row { flex-direction: column; }
+      .update { text-align: left; }
+      .topbar, .content { padding: 12px; }
+      .guild-row { grid-template-columns: 42px minmax(0,1fr) 90px 68px; }
+      .tabs { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); }
+      .tab { width: 100%; min-width: 0; }
+      .panel-header { align-items: flex-start; flex-direction: column; }
+      .footer { flex-direction: column; }
     }
   </style>
 </head>
@@ -645,20 +598,24 @@
         </div>
       </div>
 
-      <div class="searchbar">
-        <label for="serverCode">서버 코드</label>
-        <input
-          id="serverCode"
-          class="code-input"
-          maxlength="2"
-          autocomplete="off"
-          spellcheck="false"
-          placeholder="A~AX"
-        />
-        <button id="searchBtn" class="game-btn" type="button">검색</button>
+      <div class="search-area">
+        <div class="search-block">
+          <div class="search-title">서버 조회</div>
+          <div class="search-line">
+            <label for="serverCode">서버 코드</label>
+            <input id="serverCode" class="text-input code-input" maxlength="2" placeholder="A~AX" />
+            <button id="searchBtn" class="game-btn" type="button">검색</button>
+            <div class="server-result">매칭 서버 <b id="serverName">-</b></div>
+          </div>
+        </div>
 
-        <div class="server-result">
-          매칭 서버 <b id="serverName">-</b>
+        <div class="search-block">
+          <div class="search-title">결사 조회</div>
+          <div class="search-line">
+            <label for="guildSearchInput">결사명</label>
+            <input id="guildSearchInput" class="text-input guild-search-input" placeholder="결사명을 입력하세요" />
+            <button id="guildSearchBtn" class="game-btn" type="button">결사 검색</button>
+          </div>
         </div>
       </div>
 
@@ -670,9 +627,8 @@
         <section class="panel">
           <div class="panel-header">
             <div class="panel-title">결사 랭킹 TOP 5</div>
-            <div class="panel-note">선택 시 우측 인원 강조</div>
+            <div class="panel-actions">선택 시 우측 인원 강조</div>
           </div>
-
           <div id="guildList" class="guild-list">
             <div class="empty-guild">서버 코드를 검색해 주세요.</div>
           </div>
@@ -681,7 +637,14 @@
         <section class="panel">
           <div class="panel-header">
             <div class="panel-title">클래스별 유저 랭킹</div>
-            <div class="panel-note">상위 10위 기준</div>
+            <div class="panel-actions">
+              표시 범위
+              <select id="rankLimit" class="rank-limit">
+                <option value="10">TOP 10</option>
+                <option value="50">TOP 50</option>
+                <option value="100">TOP 100</option>
+              </select>
+            </div>
           </div>
 
           <div class="ranking-controls">
@@ -704,19 +667,17 @@
             <table>
               <thead>
                 <tr>
-                  <th style="width: 70px">순위</th>
-                  <th style="width: 32%">닉네임</th>
-                  <th style="width: 14%">클래스</th>
-                  <th style="width: 14%">소속 결사</th>
-                  <th style="width: 8%">레벨</th>
-                  <th style="width: 8%">토벌</th>
-                  <th style="width: 12%">판정</th>
+                  <th style="width:70px">순위</th>
+                  <th style="width:30%">닉네임</th>
+                  <th style="width:15%">클래스</th>
+                  <th style="width:15%">소속 결사</th>
+                  <th style="width:8%">레벨</th>
+                  <th style="width:8%">토벌</th>
+                  <th style="width:12%">판정</th>
                 </tr>
               </thead>
               <tbody id="rankingBody">
-                <tr class="empty-row">
-                  <td colspan="7">서버 코드를 검색해 주세요.</td>
-                </tr>
+                <tr class="empty-row"><td colspan="7">서버 코드를 검색해 주세요.</td></tr>
               </tbody>
             </table>
           </div>
@@ -724,10 +685,64 @@
       </div>
 
       <div class="footer">
-        <div>※ 공식 홈페이지 공개 랭킹 데이터를 기반으로 표시합니다.</div>
+        <div>※ 공식 홈페이지 랭킹 기반 데이터입니다.</div>
         <div>서버 코드 A ~ AX</div>
       </div>
     </main>
+  </div>
+
+  <div id="guildSearchModal" class="modal-backdrop">
+    <div class="modal">
+      <div class="modal-head">
+        <div id="guildSearchModalTitle" class="modal-title">결사 검색 결과</div>
+        <button class="modal-close" data-close="guildSearchModal">×</button>
+      </div>
+      <div class="modal-body">
+        <div class="table-wrap">
+          <table class="modal-table">
+            <thead>
+              <tr>
+                <th style="width:90px">서버코드</th>
+                <th style="width:130px">서버명</th>
+                <th>결사명</th>
+                <th>결사장</th>
+                <th style="width:110px">결사원</th>
+                <th style="width:90px">레벨</th>
+                <th style="width:90px">보기</th>
+              </tr>
+            </thead>
+            <tbody id="guildSearchBody"></tbody>
+          </table>
+        </div>
+        <div class="modal-note">※ 검색된 결사는 결사 레벨이 높은 순으로 최대 10개까지 표시됩니다.</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="guildMembersModal" class="modal-backdrop">
+    <div class="modal small">
+      <div class="modal-head">
+        <div id="guildMembersModalTitle" class="modal-title">결사 소속 인원</div>
+        <button class="modal-close" data-close="guildMembersModal">×</button>
+      </div>
+      <div class="modal-body">
+        <div class="table-wrap">
+          <table class="modal-table">
+            <thead>
+              <tr>
+                <th style="width:90px">순위</th>
+                <th>닉네임</th>
+                <th style="width:160px">클래스</th>
+                <th style="width:100px">레벨</th>
+                <th style="width:100px">토벌</th>
+              </tr>
+            </thead>
+            <tbody id="guildMembersBody"></tbody>
+          </table>
+        </div>
+        <div class="modal-note">※ 공식 홈페이지 랭킹에 노출된 인원만 표시됩니다.</div>
+      </div>
+    </div>
   </div>
 
   <script>
@@ -737,242 +752,130 @@
     const GUILD_JSON = "Who_are_you_guild.json";
 
     const SERVER_MAP = {
-      A:  { name: "론도01", world: "2-1" },
-      B:  { name: "론도02", world: "2-2" },
-      C:  { name: "론도03", world: "2-3" },
-      D:  { name: "론도04", world: "2-4" },
-      E:  { name: "론도05", world: "2-5" },
-
-      F:  { name: "라인소프01", world: "3-1" },
-      G:  { name: "라인소프02", world: "3-2" },
-      H:  { name: "라인소프03", world: "3-3" },
-      I:  { name: "라인소프04", world: "3-4" },
-      J:  { name: "라인소프05", world: "3-5" },
-
-      K:  { name: "아민타01", world: "5-1" },
-      L:  { name: "아민타02", world: "5-2" },
-      M:  { name: "아민타03", world: "5-3" },
-      N:  { name: "아민타04", world: "5-4" },
-      O:  { name: "아민타05", world: "5-5" },
-
-      P:  { name: "가리안01", world: "8-1" },
-      Q:  { name: "가리안02", world: "8-2" },
-      R:  { name: "가리안03", world: "8-3" },
-      S:  { name: "가리안04", world: "8-4" },
-      T:  { name: "가리안05", world: "8-5" },
-
-      U:  { name: "사도바01", world: "10-1" },
-      V:  { name: "사도바02", world: "10-2" },
-      W:  { name: "사도바03", world: "10-3" },
-      X:  { name: "사도바04", world: "10-4" },
-      Y:  { name: "사도바05", world: "10-5" },
-
-      Z:  { name: "제롬01", world: "11-1" },
-      AA: { name: "제롬02", world: "11-2" },
-      AB: { name: "제롬03", world: "11-3" },
-      AC: { name: "제롬04", world: "11-4" },
-      AD: { name: "제롬05", world: "11-5" },
-
-      AE: { name: "아티산01", world: "12-1" },
-      AF: { name: "아티산02", world: "12-2" },
-      AG: { name: "아티산03", world: "12-3" },
-      AH: { name: "아티산04", world: "12-4" },
-      AI: { name: "아티산05", world: "12-5" },
-
-      AJ: { name: "나세르01", world: "14-1" },
-      AK: { name: "나세르02", world: "14-2" },
-      AL: { name: "나세르03", world: "14-3" },
-      AM: { name: "나세르04", world: "14-4" },
-      AN: { name: "나세르05", world: "14-5" },
-
-      AO: { name: "타리아01", world: "16-1" },
-      AP: { name: "타리아02", world: "16-2" },
-      AQ: { name: "타리아03", world: "16-3" },
-      AR: { name: "타리아04", world: "16-4" },
-      AS: { name: "타리아05", world: "16-5" },
-
-      AT: { name: "메르비스01", world: "27-1" },
-      AU: { name: "메르비스02", world: "27-2" },
-      AV: { name: "메르비스03", world: "27-3" },
-      AW: { name: "메르비스04", world: "27-4" },
-      AX: { name: "메르비스05", world: "27-5" }
+      A:{name:"론도01",world:"2-1"}, B:{name:"론도02",world:"2-2"}, C:{name:"론도03",world:"2-3"}, D:{name:"론도04",world:"2-4"}, E:{name:"론도05",world:"2-5"},
+      F:{name:"라인소프01",world:"3-1"}, G:{name:"라인소프02",world:"3-2"}, H:{name:"라인소프03",world:"3-3"}, I:{name:"라인소프04",world:"3-4"}, J:{name:"라인소프05",world:"3-5"},
+      K:{name:"아민타01",world:"5-1"}, L:{name:"아민타02",world:"5-2"}, M:{name:"아민타03",world:"5-3"}, N:{name:"아민타04",world:"5-4"}, O:{name:"아민타05",world:"5-5"},
+      P:{name:"가리안01",world:"8-1"}, Q:{name:"가리안02",world:"8-2"}, R:{name:"가리안03",world:"8-3"}, S:{name:"가리안04",world:"8-4"}, T:{name:"가리안05",world:"8-5"},
+      U:{name:"사도바01",world:"10-1"}, V:{name:"사도바02",world:"10-2"}, W:{name:"사도바03",world:"10-3"}, X:{name:"사도바04",world:"10-4"}, Y:{name:"사도바05",world:"10-5"},
+      Z:{name:"제롬01",world:"11-1"}, AA:{name:"제롬02",world:"11-2"}, AB:{name:"제롬03",world:"11-3"}, AC:{name:"제롬04",world:"11-4"}, AD:{name:"제롬05",world:"11-5"},
+      AE:{name:"아티산01",world:"12-1"}, AF:{name:"아티산02",world:"12-2"}, AG:{name:"아티산03",world:"12-3"}, AH:{name:"아티산04",world:"12-4"}, AI:{name:"아티산05",world:"12-5"},
+      AJ:{name:"나세르01",world:"14-1"}, AK:{name:"나세르02",world:"14-2"}, AL:{name:"나세르03",world:"14-3"}, AM:{name:"나세르04",world:"14-4"}, AN:{name:"나세르05",world:"14-5"},
+      AO:{name:"타리아01",world:"16-1"}, AP:{name:"타리아02",world:"16-2"}, AQ:{name:"타리아03",world:"16-3"}, AR:{name:"타리아04",world:"16-4"}, AS:{name:"타리아05",world:"16-5"},
+      AT:{name:"메르비스01",world:"27-1"}, AU:{name:"메르비스02",world:"27-2"}, AV:{name:"메르비스03",world:"27-3"}, AW:{name:"메르비스04",world:"27-4"}, AX:{name:"메르비스05",world:"27-5"}
     };
+
+    const WORLD_TO_SERVER = Object.fromEntries(
+      Object.entries(SERVER_MAP).map(([code, value]) => [value.world, {code, name:value.name}])
+    );
 
     const CLASS_MAP = {
-      AbyssRevenant: "심연추방자",
-      Enforcer: "집행관",
-      SolarSentinel: "태양감시자",
-      RuneScribe: "주문각인사",
-      MirageBlade: "환영검사",
-      WildWarrior: "야만투사",
-      IncenseArcher: "향사수"
+      AbyssRevenant:"심연추방자",
+      Enforcer:"집행관",
+      SolarSentinel:"태양감시자",
+      RuneScribe:"주문각인사",
+      MirageBlade:"환영검사",
+      WildWarrior:"야만투사",
+      IncenseArcher:"향사수"
     };
 
-    const CLASS_ORDER = [
-      "전체",
-      "심연추방자",
-      "집행관",
-      "태양감시자",
-      "주문각인사",
-      "환영검사",
-      "야만투사",
-      "향사수"
-    ];
+    const CLASS_ORDER = ["전체","심연추방자","집행관","태양감시자","주문각인사","환영검사","야만투사","향사수"];
 
     const state = {
       characters: [],
       guilds: [],
       currentWorld: null,
-      currentServerName: null,
       activeClass: "전체",
       selectedGuild: null,
-      topGuildNames: []
+      topGuildNames: [],
+      rankLimit: 10
     };
 
-    const elements = {
-      dataStatus: document.getElementById("dataStatus"),
-      loadedTime: document.getElementById("loadedTime"),
-      serverCode: document.getElementById("serverCode"),
-      searchBtn: document.getElementById("searchBtn"),
-      serverName: document.getElementById("serverName"),
-      message: document.getElementById("message"),
-      guildList: document.getElementById("guildList"),
-      classTabs: document.getElementById("classTabs"),
-      selectedGuildOnly: document.getElementById("selectedGuildOnly"),
-      rankingBody: document.getElementById("rankingBody")
-    };
+    const $ = (id) => document.getElementById(id);
 
     function escapeHtml(value) {
       return String(value ?? "")
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;")
-        .replaceAll("'", "&#039;");
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
     }
 
     function numberOrZero(value) {
-      const number = Number(value);
-      return Number.isFinite(number) ? number : 0;
+      const n = Number(value);
+      return Number.isFinite(n) ? n : 0;
     }
 
-    function getClassName(classCode) {
-      return CLASS_MAP[classCode] || classCode || "-";
-    }
-
-    function formatLoadedTime() {
-      return new Intl.DateTimeFormat("ko-KR", {
-        year: "numeric",
-        month: "2-digit",
-        day: "2-digit",
-        hour: "2-digit",
-        minute: "2-digit"
-      }).format(new Date());
+    function getClassName(code) {
+      return CLASS_MAP[code] || code || "-";
     }
 
     async function loadJson(url) {
-      const separator = url.includes("?") ? "&" : "?";
-      const response = await fetch(
-        `${url}${separator}t=${Date.now()}`,
-        { cache: "no-store" }
-      );
-
-      if (!response.ok) {
-        throw new Error(`${url} 불러오기 실패 (${response.status})`);
-      }
-
+      const response = await fetch(`${url}?t=${Date.now()}`, {cache:"no-store"});
+      if (!response.ok) throw new Error(`${url} 불러오기 실패 (${response.status})`);
       const data = await response.json();
-
-      if (!Array.isArray(data)) {
-        throw new Error(`${url} 형식이 배열이 아닙니다.`);
-      }
-
+      if (!Array.isArray(data)) throw new Error(`${url} 형식 오류`);
       return data;
     }
 
     async function loadData() {
       try {
-        elements.dataStatus.textContent = "불러오는 중";
-        elements.dataStatus.classList.remove("error");
-
         const [characters, guilds] = await Promise.all([
           loadJson(CHARACTER_JSON),
           loadJson(GUILD_JSON)
         ]);
-
         state.characters = characters;
         state.guilds = guilds;
+        $("dataStatus").textContent = "정상";
+        $("loadedTime").textContent = new Intl.DateTimeFormat("ko-KR", {
+          year:"numeric", month:"2-digit", day:"2-digit", hour:"2-digit", minute:"2-digit"
+        }).format(new Date());
 
-        elements.dataStatus.textContent = "정상";
-        elements.loadedTime.textContent = formatLoadedTime();
-
-        const initialCode = "A";
-        elements.serverCode.value = initialCode;
+        $("serverCode").value = "A";
         searchServer();
       } catch (error) {
         console.error(error);
-        elements.dataStatus.textContent = "오류";
-        elements.dataStatus.classList.add("error");
-        elements.message.textContent =
-          "JSON 파일을 불러오지 못했습니다. index.html과 같은 위치에 두 파일이 있는지 확인해 주세요.";
+        $("dataStatus").textContent = "오류";
+        $("dataStatus").classList.add("error");
+        $("message").textContent = "JSON 두 파일이 index.html과 같은 위치에 있는지 확인해 주세요.";
       }
     }
 
     function createClassTabs() {
-      elements.classTabs.innerHTML = "";
-
-      CLASS_ORDER.forEach((className) => {
+      $("classTabs").innerHTML = "";
+      CLASS_ORDER.forEach((name) => {
         const button = document.createElement("button");
-        button.type = "button";
-        button.className = "tab";
-        button.textContent = className;
-
-        if (className === state.activeClass) {
-          button.classList.add("active");
-        }
-
+        button.className = "tab" + (state.activeClass === name ? " active" : "");
+        button.textContent = name;
         button.addEventListener("click", () => {
-          state.activeClass = className;
-
-          document.querySelectorAll(".tab").forEach((tab) => {
-            tab.classList.toggle("active", tab.textContent === className);
-          });
-
+          state.activeClass = name;
+          createClassTabs();
           renderRanking();
         });
-
-        elements.classTabs.appendChild(button);
+        $("classTabs").appendChild(button);
       });
     }
 
     function searchServer() {
-      const code = elements.serverCode.value.trim().toUpperCase();
+      const code = $("serverCode").value.trim().toUpperCase();
+      $("serverCode").value = code;
+      $("message").textContent = "";
+
       const server = SERVER_MAP[code];
-
-      elements.serverCode.value = code;
-      elements.message.textContent = "";
-
       if (!server) {
         state.currentWorld = null;
-        state.currentServerName = null;
-        state.selectedGuild = null;
-        state.topGuildNames = [];
-
-        elements.serverName.textContent = "알 수 없는 코드";
-        elements.guildList.innerHTML =
-          '<div class="empty-guild">A부터 AX 사이의 서버 코드를 입력해 주세요.</div>';
+        $("serverName").textContent = "알 수 없는 코드";
+        $("guildList").innerHTML = '<div class="empty-guild">A부터 AX 사이의 코드를 입력해 주세요.</div>';
         renderEmptyRanking("올바른 서버 코드를 입력해 주세요.");
         return;
       }
 
       state.currentWorld = server.world;
-      state.currentServerName = server.name;
       state.activeClass = "전체";
       state.selectedGuild = null;
-
-      elements.serverName.textContent = server.name;
-      elements.selectedGuildOnly.checked = false;
-      elements.selectedGuildOnly.disabled = true;
+      $("selectedGuildOnly").checked = false;
+      $("selectedGuildOnly").disabled = true;
+      $("serverName").textContent = server.name;
 
       createClassTabs();
       renderGuilds();
@@ -980,99 +883,61 @@
     }
 
     function renderGuilds() {
-      const serverGuilds = state.guilds
-        .filter((guild) => guild.world === state.currentWorld)
-        .sort((a, b) => numberOrZero(a.ranking) - numberOrZero(b.ranking))
-        .slice(0, 5);
+      const guilds = state.guilds
+        .filter(g => g.world === state.currentWorld)
+        .sort((a,b) => numberOrZero(a.ranking) - numberOrZero(b.ranking))
+        .slice(0,5);
 
-      state.topGuildNames = serverGuilds
-        .map((guild) => guild.guild_name)
-        .filter(Boolean);
+      state.topGuildNames = guilds.map(g => g.guild_name).filter(Boolean);
+      $("guildList").innerHTML = "";
 
-      elements.guildList.innerHTML = "";
-
-      if (serverGuilds.length === 0) {
-        elements.guildList.innerHTML =
-          '<div class="empty-guild">이 서버의 결사 랭킹 데이터가 없습니다.</div>';
+      if (!guilds.length) {
+        $("guildList").innerHTML = '<div class="empty-guild">이 서버의 결사 데이터가 없습니다.</div>';
         return;
       }
 
-      serverGuilds.forEach((guild) => {
+      guilds.forEach((guild) => {
         const row = document.createElement("div");
         row.className = "guild-row";
         row.dataset.guild = guild.guild_name || "";
-
         row.innerHTML = `
           <div class="guild-rank">${escapeHtml(guild.ranking ?? "-")}</div>
           <div>
             <div class="guild-name">${escapeHtml(guild.guild_name || "-")}</div>
-            <div class="guild-sub">
-              결사장 ${escapeHtml(guild.guild_master || "-")}
-            </div>
+            <div class="guild-sub">결사장 ${escapeHtml(guild.guild_master || "-")}</div>
           </div>
-          <div class="guild-cell">
-            <span>결사원</span>
-            ${escapeHtml(guild.guild_member_count ?? "-")}
-            /
-            ${escapeHtml(guild.max_guild_member_count ?? "-")}
-          </div>
-          <div class="guild-cell">
-            <span>레벨</span>
-            ${escapeHtml(guild.guild_level ?? "-")}
-          </div>
+          <div class="guild-cell"><span>결사원</span>${escapeHtml(guild.guild_member_count ?? "-")} / ${escapeHtml(guild.max_guild_member_count ?? "-")}</div>
+          <div class="guild-cell"><span>레벨</span>${escapeHtml(guild.guild_level ?? "-")}</div>
         `;
-
         row.addEventListener("click", () => {
-          const clickedGuild = guild.guild_name || null;
-          const isSameGuild = state.selectedGuild === clickedGuild;
-
-          state.selectedGuild = isSameGuild ? null : clickedGuild;
-          elements.selectedGuildOnly.disabled = !state.selectedGuild;
-
-          if (!state.selectedGuild) {
-            elements.selectedGuildOnly.checked = false;
-          }
-
-          document.querySelectorAll(".guild-row").forEach((item) => {
-            item.classList.toggle(
-              "selected",
-              Boolean(state.selectedGuild) &&
-              item.dataset.guild === state.selectedGuild
-            );
+          state.selectedGuild = state.selectedGuild === guild.guild_name ? null : guild.guild_name;
+          $("selectedGuildOnly").disabled = !state.selectedGuild;
+          if (!state.selectedGuild) $("selectedGuildOnly").checked = false;
+          document.querySelectorAll(".guild-row").forEach(item => {
+            item.classList.toggle("selected", item.dataset.guild === state.selectedGuild);
           });
-
           renderRanking();
         });
-
-        elements.guildList.appendChild(row);
+        $("guildList").appendChild(row);
       });
     }
 
     function getVisiblePlayers() {
-      let players = state.characters.filter(
-        (player) => player.world === state.currentWorld
-      );
-
-      players.sort(
-        (a, b) => numberOrZero(a.ranking) - numberOrZero(b.ranking)
-      );
+      let players = state.characters
+        .filter(p => p.world === state.currentWorld)
+        .sort((a,b) => numberOrZero(a.ranking) - numberOrZero(b.ranking));
 
       if (state.activeClass !== "전체") {
-        players = players.filter(
-          (player) => getClassName(player.class) === state.activeClass
-        );
+        players = players.filter(p => getClassName(p.class) === state.activeClass);
       }
 
-      if (
-        elements.selectedGuildOnly.checked &&
-        state.selectedGuild
-      ) {
-        players = players.filter(
-          (player) => player.guild === state.selectedGuild
-        );
+      players = players.slice(0, state.rankLimit);
+
+      if ($("selectedGuildOnly").checked && state.selectedGuild) {
+        players = players.filter(p => p.guild === state.selectedGuild);
       }
 
-      return players.slice(0, 10);
+      return players;
     }
 
     function renderRanking() {
@@ -1082,76 +947,152 @@
       }
 
       const players = getVisiblePlayers();
-      elements.rankingBody.innerHTML = "";
+      $("rankingBody").innerHTML = "";
 
-      if (players.length === 0) {
+      if (!players.length) {
         renderEmptyRanking("조건에 맞는 랭킹 데이터가 없습니다.");
         return;
       }
 
-      players.forEach((player, index) => {
-        const className = getClassName(player.class);
+      players.forEach((player) => {
         const isTopGuild = state.topGuildNames.includes(player.guild);
-        const isSelectedGuild =
-          Boolean(state.selectedGuild) &&
-          player.guild === state.selectedGuild;
+        const isSelectedGuild = state.selectedGuild && player.guild === state.selectedGuild;
+        const tr = document.createElement("tr");
+        if (isSelectedGuild) tr.classList.add("selected-guild");
 
-        const row = document.createElement("tr");
-
-        if (isSelectedGuild) {
-          row.classList.add("selected-guild");
-        }
-
-        row.innerHTML = `
-          <td>${index + 1}</td>
+        tr.innerHTML = `
+          <td class="center">${escapeHtml(player.ranking ?? "-")}</td>
           <td class="player-name">${escapeHtml(player.name || "-")}</td>
-          <td class="center">${escapeHtml(className)}</td>
-          <td class="center">
-            ${
-              player.guild
-                ? `<span class="guild-badge">${escapeHtml(player.guild)}</span>`
-                : "-"
-            }
-          </td>
+          <td class="center">${escapeHtml(getClassName(player.class))}</td>
+          <td class="center">${player.guild ? `<span class="guild-badge">${escapeHtml(player.guild)}</span>` : "-"}</td>
           <td class="center">${escapeHtml(player.level ?? "-")}</td>
           <td class="center">${escapeHtml(player.grade ?? "-")}</td>
-          <td class="center">
-            ${
-              isTopGuild
-                ? '<span class="candidate-badge">유력 후보</span>'
-                : "-"
-            }
-          </td>
+          <td class="center">${isTopGuild ? '<span class="candidate-badge">유력 후보</span>' : "-"}</td>
         `;
-
-        elements.rankingBody.appendChild(row);
+        $("rankingBody").appendChild(tr);
       });
     }
 
     function renderEmptyRanking(message) {
-      elements.rankingBody.innerHTML = `
-        <tr class="empty-row">
-          <td colspan="7">${escapeHtml(message)}</td>
-        </tr>
-      `;
+      $("rankingBody").innerHTML = `<tr class="empty-row"><td colspan="7">${escapeHtml(message)}</td></tr>`;
     }
 
-    elements.searchBtn.addEventListener("click", searchServer);
+    function searchGuilds() {
+      const keyword = $("guildSearchInput").value.trim();
+      if (!keyword) {
+        $("message").textContent = "검색할 결사명을 입력해 주세요.";
+        return;
+      }
 
-    elements.serverCode.addEventListener("keydown", (event) => {
-      if (event.key === "Enter") {
-        searchServer();
+      let results = state.guilds.filter(g => (g.guild_name || "").includes(keyword));
+      const exact = results.filter(g => g.guild_name === keyword);
+      if (exact.length) results = exact;
+
+      results = results
+        .sort((a,b) =>
+          numberOrZero(b.guild_level) - numberOrZero(a.guild_level) ||
+          numberOrZero(a.ranking) - numberOrZero(b.ranking)
+        )
+        .slice(0,10);
+
+      $("guildSearchModalTitle").textContent = `결사 검색 결과 · ${keyword}`;
+      $("guildSearchBody").innerHTML = "";
+
+      if (!results.length) {
+        $("guildSearchBody").innerHTML = '<tr class="empty-row"><td colspan="7">검색 결과가 없습니다.</td></tr>';
+      } else {
+        results.forEach((guild) => {
+          const server = WORLD_TO_SERVER[guild.world] || {code:"-", name:"-"};
+          const tr = document.createElement("tr");
+          tr.innerHTML = `
+            <td>${escapeHtml(server.code)}</td>
+            <td>${escapeHtml(server.name)}</td>
+            <td>${escapeHtml(guild.guild_name || "-")}</td>
+            <td>${escapeHtml(guild.guild_master || "-")}</td>
+            <td>${escapeHtml(guild.guild_member_count ?? "-")} / ${escapeHtml(guild.max_guild_member_count ?? "-")}</td>
+            <td>${escapeHtml(guild.guild_level ?? "-")}</td>
+            <td><button class="small-btn" type="button">보기</button></td>
+          `;
+          tr.querySelector("button").addEventListener("click", () => {
+            showGuildMembers(guild);
+          });
+          $("guildSearchBody").appendChild(tr);
+        });
+      }
+
+      openModal("guildSearchModal");
+    }
+
+    function showGuildMembers(guild) {
+      const server = WORLD_TO_SERVER[guild.world] || {code:"-", name:"-"};
+      const members = state.characters
+        .filter(p => p.world === guild.world && p.guild === guild.guild_name)
+        .sort((a,b) => numberOrZero(a.ranking) - numberOrZero(b.ranking));
+
+      $("guildMembersModalTitle").textContent =
+        `${guild.guild_name} · ${server.code} ${server.name} · 랭킹 노출 인원 ${members.length}명`;
+
+      $("guildMembersBody").innerHTML = "";
+
+      if (!members.length) {
+        $("guildMembersBody").innerHTML =
+          '<tr class="empty-row"><td colspan="5">랭킹에 노출된 결사원이 없습니다.</td></tr>';
+      } else {
+        members.forEach((member) => {
+          const tr = document.createElement("tr");
+          tr.innerHTML = `
+            <td>${escapeHtml(member.ranking ?? "-")}</td>
+            <td>${escapeHtml(member.name || "-")}</td>
+            <td>${escapeHtml(getClassName(member.class))}</td>
+            <td>${escapeHtml(member.level ?? "-")}</td>
+            <td>${escapeHtml(member.grade ?? "-")}</td>
+          `;
+          $("guildMembersBody").appendChild(tr);
+        });
+      }
+
+      openModal("guildMembersModal");
+    }
+
+    function openModal(id) {
+      $(id).classList.add("open");
+    }
+
+    function closeModal(id) {
+      $(id).classList.remove("open");
+    }
+
+    $("searchBtn").addEventListener("click", searchServer);
+    $("serverCode").addEventListener("keydown", e => { if (e.key === "Enter") searchServer(); });
+    $("serverCode").addEventListener("input", e => {
+      e.target.value = e.target.value.toUpperCase().replace(/[^A-Z]/g,"").slice(0,2);
+    });
+
+    $("rankLimit").addEventListener("change", e => {
+      state.rankLimit = Number(e.target.value);
+      renderRanking();
+    });
+
+    $("selectedGuildOnly").addEventListener("change", renderRanking);
+
+    $("guildSearchBtn").addEventListener("click", searchGuilds);
+    $("guildSearchInput").addEventListener("keydown", e => { if (e.key === "Enter") searchGuilds(); });
+
+    document.querySelectorAll("[data-close]").forEach(button => {
+      button.addEventListener("click", () => closeModal(button.dataset.close));
+    });
+
+    document.querySelectorAll(".modal-backdrop").forEach(backdrop => {
+      backdrop.addEventListener("click", e => {
+        if (e.target === backdrop) closeModal(backdrop.id);
+      });
+    });
+
+    document.addEventListener("keydown", e => {
+      if (e.key === "Escape") {
+        document.querySelectorAll(".modal-backdrop.open").forEach(modal => modal.classList.remove("open"));
       }
     });
-
-    elements.serverCode.addEventListener("input", (event) => {
-      event.target.value = event.target.value
-        .toUpperCase()
-        .replace(/[^A-Z]/g, "")
-        .slice(0, 2);
-    });
-
-    elements.selectedGuildOnly.addEventListener("change", renderRanking);
 
     createClassTabs();
     loadData();
