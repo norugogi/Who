@@ -1,0 +1,1160 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="dark" />
+  <title>너 누구야</title>
+
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap");
+
+    :root {
+      --bg: #171817;
+      --panel: #20211f;
+      --panel-deep: #151614;
+      --line: #4a493f;
+      --line-gold: #6d6248;
+      --gold: #c8ad6e;
+      --gold-bright: #ead38f;
+      --text: #f0ede5;
+      --text-soft: #bdb8ac;
+      --danger: #e0a18c;
+      --shadow: rgba(0, 0, 0, 0.45);
+      --row: #20221f;
+      --row-hover: #2b2d29;
+      --selected-a: #6d5b34;
+      --selected-b: #54492f;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      min-height: 100%;
+      background:
+        linear-gradient(rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.38)),
+        radial-gradient(circle at 50% 0%, #3a3b36 0%, #1d1e1c 48%, #111210 100%);
+      color: var(--text);
+      font-family: "Noto Sans KR", "Malgun Gothic", sans-serif;
+      font-size: 16px;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      padding: 14px 1cm;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    .app {
+      width: 100%;
+      min-height: calc(100vh - 28px);
+      margin: 0 auto;
+      border: 1px solid #3c3b35;
+      background: rgba(18, 19, 17, 0.94);
+      box-shadow: 0 18px 45px var(--shadow);
+    }
+
+    .topbar {
+      position: relative;
+      min-height: 138px;
+      padding: 18px 26px 20px;
+      border-bottom: 1px solid #3b3931;
+      background:
+        linear-gradient(90deg, rgba(34, 35, 32, 0.96), rgba(26, 27, 25, 0.88)),
+        radial-gradient(circle at 60% 20%, rgba(255, 255, 255, 0.04), transparent 35%);
+    }
+
+    .topbar::after {
+      content: "";
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      opacity: 0.7;
+    }
+
+    .title-row {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .brand-mark {
+      display: grid;
+      width: 42px;
+      height: 42px;
+      place-items: center;
+      border: 1px solid var(--gold);
+      background:
+        linear-gradient(135deg, rgba(230, 205, 137, 0.2), rgba(70, 55, 28, 0.15)),
+        #1b1c1a;
+      color: var(--gold-bright);
+      font-size: 22px;
+      box-shadow: inset 0 0 0 3px rgba(0, 0, 0, 0.25);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 30px;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    .subtitle {
+      margin-top: 5px;
+      color: #c8c3b8;
+      font-size: 14px;
+    }
+
+    .update {
+      color: var(--text-soft);
+      font-size: 13px;
+      line-height: 1.7;
+      text-align: right;
+    }
+
+    .update strong {
+      color: var(--gold-bright);
+      font-weight: 600;
+    }
+
+    .update .error {
+      color: var(--danger);
+    }
+
+    .searchbar {
+      display: flex;
+      min-height: 38px;
+      align-items: center;
+      gap: 10px;
+      margin-top: 16px;
+      flex-wrap: wrap;
+    }
+
+    .searchbar label {
+      margin-right: 4px;
+      color: #e8e1d1;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .code-input {
+      width: 130px;
+      height: 38px;
+      padding: 0 12px;
+      border: 1px solid #736649;
+      outline: none;
+      background: #111210;
+      color: var(--gold-bright);
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.6);
+    }
+
+    .code-input:focus {
+      border-color: var(--gold-bright);
+    }
+
+    .game-btn {
+      min-width: 92px;
+      height: 38px;
+      padding: 0 18px;
+      border: 1px solid #856d42;
+      background: linear-gradient(#5f4b30, #382b1d);
+      color: #eee4c9;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow:
+        inset 0 1px rgba(255, 255, 255, 0.08),
+        0 1px 0 rgba(0, 0, 0, 0.8);
+    }
+
+    .game-btn:hover {
+      background: linear-gradient(#71593a, #433322);
+      color: #fff;
+    }
+
+    .server-result {
+      display: flex;
+      min-height: 38px;
+      align-items: center;
+      padding: 0 14px;
+      border-left: 1px solid var(--line-gold);
+      color: var(--text-soft);
+      font-size: 13px;
+    }
+
+    .server-result b {
+      margin-left: 8px;
+      color: var(--gold-bright);
+      font-size: 16px;
+    }
+
+    .message {
+      min-height: 22px;
+      margin-top: 7px;
+      color: var(--danger);
+      font-size: 13px;
+    }
+
+    .content {
+      padding: 16px;
+    }
+
+    .main-grid {
+      display: grid;
+      grid-template-columns: 430px minmax(0, 1fr);
+      gap: 14px;
+    }
+
+    .panel {
+      min-width: 0;
+      border: 1px solid #4c483b;
+      background:
+        linear-gradient(rgba(255, 255, 255, 0.015), rgba(255, 255, 255, 0)),
+        rgba(29, 30, 28, 0.96);
+      box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.25);
+    }
+
+    .panel-header {
+      display: flex;
+      height: 46px;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 14px;
+      border-bottom: 1px solid var(--line-gold);
+      background: linear-gradient(90deg, #292a27, #1c1d1b);
+    }
+
+    .panel-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 17px;
+      font-weight: 700;
+    }
+
+    .panel-title::before {
+      width: 4px;
+      height: 18px;
+      background: var(--gold);
+      content: "";
+      box-shadow: 0 0 8px rgba(205, 177, 109, 0.22);
+    }
+
+    .panel-note {
+      color: #bfb9ad;
+      font-size: 12px;
+    }
+
+    .guild-list {
+      padding: 8px;
+    }
+
+    .guild-row {
+      display: grid;
+      min-height: 72px;
+      grid-template-columns: 50px minmax(0, 1fr) 108px 82px;
+      align-items: center;
+      padding: 8px 10px;
+      margin-bottom: 6px;
+      border: 1px solid #46443d;
+      background: linear-gradient(90deg, #3a3a36, #2b2c29);
+      cursor: pointer;
+      transition: 0.15s ease;
+    }
+
+    .guild-row:last-child {
+      margin-bottom: 0;
+    }
+
+    .guild-row:hover {
+      border-color: #8c794f;
+      filter: brightness(1.06);
+    }
+
+    .guild-row.selected {
+      border-color: #9c875b;
+      background: linear-gradient(90deg, #766747, #5b4f36);
+      box-shadow: inset 0 0 0 1px rgba(238, 211, 143, 0.16);
+    }
+
+    .guild-rank {
+      color: #c8c2b3;
+      font-size: 20px;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    .guild-row:nth-child(1) .guild-rank {
+      color: #f0d888;
+    }
+
+    .guild-row:nth-child(2) .guild-rank {
+      color: #c9c9c4;
+    }
+
+    .guild-row:nth-child(3) .guild-rank {
+      color: #c98f61;
+    }
+
+    .guild-name {
+      overflow: hidden;
+      color: #fffaf0;
+      font-size: 18px;
+      font-weight: 600;
+      line-height: 1.4;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .guild-sub {
+      overflow: hidden;
+      margin-top: 7px;
+      color: #f2ede3;
+      font-size: 15px;
+      font-weight: 400;
+      line-height: 1.5;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .guild-cell {
+      color: #fffaf0;
+      font-size: 15px;
+      font-weight: 500;
+      line-height: 1.5;
+      text-align: center;
+    }
+
+    .guild-cell span {
+      display: block;
+      margin-bottom: 4px;
+      color: #e8dfcf;
+      font-size: 13px;
+      font-weight: 600;
+      line-height: 1.35;
+    }
+
+    .empty-guild {
+      padding: 28px 14px;
+      color: var(--text-soft);
+      font-size: 14px;
+      text-align: center;
+    }
+
+    .ranking-controls {
+      padding: 10px 12px;
+      border-bottom: 1px solid #454239;
+      background: #191a18;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 4px;
+      flex-wrap: wrap;
+    }
+
+    .tab {
+      min-width: 86px;
+      height: 36px;
+      padding: 0 12px;
+      border: 1px solid #4c493f;
+      background: #262724;
+      color: #aaa79f;
+      cursor: pointer;
+    }
+
+    .tab:hover {
+      border-color: #77694c;
+      color: #ddd6c5;
+    }
+
+    .tab.active {
+      border-color: #9a8455;
+      background: linear-gradient(#51452f, #342d20);
+      color: var(--gold-bright);
+    }
+
+    .filter-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      margin-top: 10px;
+      flex-wrap: wrap;
+    }
+
+    .toggle {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #d2cdc1;
+      font-size: 13px;
+    }
+
+    .toggle input {
+      accent-color: #b89b5d;
+    }
+
+    .legend {
+      display: flex;
+      gap: 12px;
+      color: #a9a69e;
+      font-size: 12px;
+    }
+
+    .legend i {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      margin-right: 4px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .legend .selected {
+      background: #6f5b31;
+    }
+
+    .legend .candidate {
+      background: #7b4b3e;
+    }
+
+    .table-wrap {
+      overflow: auto;
+      max-height: 640px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+    }
+
+    thead th {
+      position: sticky;
+      z-index: 2;
+      top: 0;
+      height: 42px;
+      border-right: 1px solid #33342f;
+      border-bottom: 1px solid #5a5546;
+      background: #171816;
+      color: #d2ccbe;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    tbody td {
+      height: 54px;
+      padding: 0 10px;
+      overflow: hidden;
+      border-right: 1px solid #343530;
+      border-bottom: 1px solid #45463f;
+      background: var(--row);
+      color: #f0ece2;
+      font-size: 15px;
+      font-weight: 400;
+      line-height: 1.45;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    tbody tr:nth-child(even) td {
+      background: var(--row);
+    }
+
+    tbody tr:hover td {
+      border-bottom-color: #55564d;
+      background: var(--row-hover);
+    }
+
+    tbody tr.selected-guild td {
+      border-bottom-color: #7a6946;
+      background: linear-gradient(90deg, var(--selected-a), var(--selected-b));
+      color: #fffaf0;
+    }
+
+    tbody tr.selected-guild:hover td {
+      border-bottom-color: #806f4e;
+      background: linear-gradient(90deg, #705f39, #554a31);
+    }
+
+    .center {
+      text-align: center;
+    }
+
+    .player-name {
+      color: #faf7f0;
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 1.45;
+    }
+
+    tbody tr.selected-guild .player-name {
+      color: #fff3c4;
+      font-weight: 600;
+    }
+
+    .guild-badge {
+      display: inline-block;
+      min-width: 72px;
+      padding: 5px 10px;
+      border: 1px solid #8a7448;
+      background: #2d2a20;
+      color: #f0d99a;
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 1.2;
+      text-align: center;
+    }
+
+    .candidate-badge {
+      display: inline-block;
+      min-width: 72px;
+      padding: 5px 10px;
+      border: 1px solid #9a604d;
+      background: #3c2721;
+      color: #f3c9b8;
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 1.2;
+      text-align: center;
+    }
+
+    tbody td:nth-child(1) {
+      padding-right: 0;
+      padding-left: 0;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    tbody td:nth-child(2) {
+      padding-right: 14px;
+      padding-left: 14px;
+    }
+
+    tbody td:nth-child(3),
+    tbody td:nth-child(4) {
+      font-weight: 400;
+    }
+
+    .empty-row td {
+      height: 120px;
+      color: var(--text-soft);
+      text-align: center;
+    }
+
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      margin-top: 14px;
+      padding: 0 2px;
+      color: #94918a;
+      font-size: 11px;
+    }
+
+    @media (max-width: 1180px) {
+      .main-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 760px) {
+      body {
+        padding: 0;
+      }
+
+      .app {
+        min-height: 100vh;
+        border: 0;
+      }
+
+      .topbar {
+        padding: 16px;
+      }
+
+      .title-row {
+        flex-direction: column;
+      }
+
+      .update {
+        text-align: left;
+      }
+
+      .content {
+        padding: 10px;
+      }
+
+      .guild-row {
+        grid-template-columns: 42px minmax(0, 1fr) 90px 68px;
+      }
+
+      .tabs {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .tab {
+        width: 100%;
+        min-width: 0;
+      }
+
+      .footer {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="app">
+    <header class="topbar">
+      <div class="title-row">
+        <div class="brand">
+          <div class="brand-mark">?</div>
+          <div>
+            <h1>너 누구야</h1>
+            <div class="subtitle">서버 코드 기반 캐릭터 · 결사 랭킹 탐색 도구</div>
+          </div>
+        </div>
+
+        <div class="update">
+          데이터 상태 <strong id="dataStatus">불러오는 중</strong><br />
+          불러온 시각 <span id="loadedTime">-</span>
+        </div>
+      </div>
+
+      <div class="searchbar">
+        <label for="serverCode">서버 코드</label>
+        <input
+          id="serverCode"
+          class="code-input"
+          maxlength="2"
+          autocomplete="off"
+          spellcheck="false"
+          placeholder="A~AX"
+        />
+        <button id="searchBtn" class="game-btn" type="button">검색</button>
+
+        <div class="server-result">
+          매칭 서버 <b id="serverName">-</b>
+        </div>
+      </div>
+
+      <div id="message" class="message"></div>
+    </header>
+
+    <main class="content">
+      <div class="main-grid">
+        <section class="panel">
+          <div class="panel-header">
+            <div class="panel-title">결사 랭킹 TOP 5</div>
+            <div class="panel-note">선택 시 우측 인원 강조</div>
+          </div>
+
+          <div id="guildList" class="guild-list">
+            <div class="empty-guild">서버 코드를 검색해 주세요.</div>
+          </div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-header">
+            <div class="panel-title">클래스별 유저 랭킹</div>
+            <div class="panel-note">상위 10위 기준</div>
+          </div>
+
+          <div class="ranking-controls">
+            <div id="classTabs" class="tabs"></div>
+
+            <div class="filter-row">
+              <label class="toggle">
+                <input id="selectedGuildOnly" type="checkbox" disabled />
+                선택 결사 소속만 보기
+              </label>
+
+              <div class="legend">
+                <span><i class="selected"></i>선택 결사 소속</span>
+                <span><i class="candidate"></i>유력 후보</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th style="width: 70px">순위</th>
+                  <th style="width: 32%">닉네임</th>
+                  <th style="width: 14%">클래스</th>
+                  <th style="width: 14%">소속 결사</th>
+                  <th style="width: 8%">레벨</th>
+                  <th style="width: 8%">토벌</th>
+                  <th style="width: 12%">판정</th>
+                </tr>
+              </thead>
+              <tbody id="rankingBody">
+                <tr class="empty-row">
+                  <td colspan="7">서버 코드를 검색해 주세요.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+
+      <div class="footer">
+        <div>※ 공식 홈페이지 공개 랭킹 데이터를 기반으로 표시합니다.</div>
+        <div>서버 코드 A ~ AX</div>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    "use strict";
+
+    const CHARACTER_JSON = "Who_are_you.json";
+    const GUILD_JSON = "Who_are_you_guild.json";
+
+    const SERVER_MAP = {
+      A:  { name: "론도01", world: "2-1" },
+      B:  { name: "론도02", world: "2-2" },
+      C:  { name: "론도03", world: "2-3" },
+      D:  { name: "론도04", world: "2-4" },
+      E:  { name: "론도05", world: "2-5" },
+
+      F:  { name: "라인소프01", world: "3-1" },
+      G:  { name: "라인소프02", world: "3-2" },
+      H:  { name: "라인소프03", world: "3-3" },
+      I:  { name: "라인소프04", world: "3-4" },
+      J:  { name: "라인소프05", world: "3-5" },
+
+      K:  { name: "아민타01", world: "5-1" },
+      L:  { name: "아민타02", world: "5-2" },
+      M:  { name: "아민타03", world: "5-3" },
+      N:  { name: "아민타04", world: "5-4" },
+      O:  { name: "아민타05", world: "5-5" },
+
+      P:  { name: "가리안01", world: "8-1" },
+      Q:  { name: "가리안02", world: "8-2" },
+      R:  { name: "가리안03", world: "8-3" },
+      S:  { name: "가리안04", world: "8-4" },
+      T:  { name: "가리안05", world: "8-5" },
+
+      U:  { name: "타리아01", world: "10-1" },
+      V:  { name: "타리아02", world: "10-2" },
+      W:  { name: "타리아03", world: "10-3" },
+      X:  { name: "타리아04", world: "10-4" },
+      Y:  { name: "타리아05", world: "10-5" },
+
+      Z:  { name: "제롬01", world: "11-1" },
+      AA: { name: "제롬02", world: "11-2" },
+      AB: { name: "제롬03", world: "11-3" },
+      AC: { name: "제롬04", world: "11-4" },
+      AD: { name: "제롬05", world: "11-5" },
+
+      AE: { name: "나세르01", world: "12-1" },
+      AF: { name: "나세르02", world: "12-2" },
+      AG: { name: "나세르03", world: "12-3" },
+      AH: { name: "나세르04", world: "12-4" },
+      AI: { name: "나세르05", world: "12-5" },
+
+      AJ: { name: "사도바01", world: "14-1" },
+      AK: { name: "사도바02", world: "14-2" },
+      AL: { name: "사도바03", world: "14-3" },
+      AM: { name: "사도바04", world: "14-4" },
+      AN: { name: "사도바05", world: "14-5" },
+
+      AO: { name: "아티산01", world: "16-1" },
+      AP: { name: "아티산02", world: "16-2" },
+      AQ: { name: "아티산03", world: "16-3" },
+      AR: { name: "아티산04", world: "16-4" },
+      AS: { name: "아티산05", world: "16-5" },
+
+      AT: { name: "메르비스01", world: "27-1" },
+      AU: { name: "메르비스02", world: "27-2" },
+      AV: { name: "메르비스03", world: "27-3" },
+      AW: { name: "메르비스04", world: "27-4" },
+      AX: { name: "메르비스05", world: "27-5" }
+    };
+
+    const CLASS_MAP = {
+      AbyssRevenant: "심연추방자",
+      Enforcer: "집행관",
+      SolarSentinel: "태양감시자",
+      RuneScribe: "주문각인사",
+      MirageBlade: "환영검사",
+      WildWarrior: "야만투사",
+      IncenseArcher: "향사수"
+    };
+
+    const CLASS_ORDER = [
+      "전체",
+      "심연추방자",
+      "집행관",
+      "태양감시자",
+      "주문각인사",
+      "환영검사",
+      "야만투사",
+      "향사수"
+    ];
+
+    const state = {
+      characters: [],
+      guilds: [],
+      currentWorld: null,
+      currentServerName: null,
+      activeClass: "전체",
+      selectedGuild: null,
+      topGuildNames: []
+    };
+
+    const elements = {
+      dataStatus: document.getElementById("dataStatus"),
+      loadedTime: document.getElementById("loadedTime"),
+      serverCode: document.getElementById("serverCode"),
+      searchBtn: document.getElementById("searchBtn"),
+      serverName: document.getElementById("serverName"),
+      message: document.getElementById("message"),
+      guildList: document.getElementById("guildList"),
+      classTabs: document.getElementById("classTabs"),
+      selectedGuildOnly: document.getElementById("selectedGuildOnly"),
+      rankingBody: document.getElementById("rankingBody")
+    };
+
+    function escapeHtml(value) {
+      return String(value ?? "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    function numberOrZero(value) {
+      const number = Number(value);
+      return Number.isFinite(number) ? number : 0;
+    }
+
+    function getClassName(classCode) {
+      return CLASS_MAP[classCode] || classCode || "-";
+    }
+
+    function formatLoadedTime() {
+      return new Intl.DateTimeFormat("ko-KR", {
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+        hour: "2-digit",
+        minute: "2-digit"
+      }).format(new Date());
+    }
+
+    async function loadJson(url) {
+      const separator = url.includes("?") ? "&" : "?";
+      const response = await fetch(
+        `${url}${separator}t=${Date.now()}`,
+        { cache: "no-store" }
+      );
+
+      if (!response.ok) {
+        throw new Error(`${url} 불러오기 실패 (${response.status})`);
+      }
+
+      const data = await response.json();
+
+      if (!Array.isArray(data)) {
+        throw new Error(`${url} 형식이 배열이 아닙니다.`);
+      }
+
+      return data;
+    }
+
+    async function loadData() {
+      try {
+        elements.dataStatus.textContent = "불러오는 중";
+        elements.dataStatus.classList.remove("error");
+
+        const [characters, guilds] = await Promise.all([
+          loadJson(CHARACTER_JSON),
+          loadJson(GUILD_JSON)
+        ]);
+
+        state.characters = characters;
+        state.guilds = guilds;
+
+        elements.dataStatus.textContent = "정상";
+        elements.loadedTime.textContent = formatLoadedTime();
+
+        const initialCode = "A";
+        elements.serverCode.value = initialCode;
+        searchServer();
+      } catch (error) {
+        console.error(error);
+        elements.dataStatus.textContent = "오류";
+        elements.dataStatus.classList.add("error");
+        elements.message.textContent =
+          "JSON 파일을 불러오지 못했습니다. index.html과 같은 위치에 두 파일이 있는지 확인해 주세요.";
+      }
+    }
+
+    function createClassTabs() {
+      elements.classTabs.innerHTML = "";
+
+      CLASS_ORDER.forEach((className) => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "tab";
+        button.textContent = className;
+
+        if (className === state.activeClass) {
+          button.classList.add("active");
+        }
+
+        button.addEventListener("click", () => {
+          state.activeClass = className;
+
+          document.querySelectorAll(".tab").forEach((tab) => {
+            tab.classList.toggle("active", tab.textContent === className);
+          });
+
+          renderRanking();
+        });
+
+        elements.classTabs.appendChild(button);
+      });
+    }
+
+    function searchServer() {
+      const code = elements.serverCode.value.trim().toUpperCase();
+      const server = SERVER_MAP[code];
+
+      elements.serverCode.value = code;
+      elements.message.textContent = "";
+
+      if (!server) {
+        state.currentWorld = null;
+        state.currentServerName = null;
+        state.selectedGuild = null;
+        state.topGuildNames = [];
+
+        elements.serverName.textContent = "알 수 없는 코드";
+        elements.guildList.innerHTML =
+          '<div class="empty-guild">A부터 AX 사이의 서버 코드를 입력해 주세요.</div>';
+        renderEmptyRanking("올바른 서버 코드를 입력해 주세요.");
+        return;
+      }
+
+      state.currentWorld = server.world;
+      state.currentServerName = server.name;
+      state.activeClass = "전체";
+      state.selectedGuild = null;
+
+      elements.serverName.textContent = server.name;
+      elements.selectedGuildOnly.checked = false;
+      elements.selectedGuildOnly.disabled = true;
+
+      createClassTabs();
+      renderGuilds();
+      renderRanking();
+    }
+
+    function renderGuilds() {
+      const serverGuilds = state.guilds
+        .filter((guild) => guild.world === state.currentWorld)
+        .sort((a, b) => numberOrZero(a.ranking) - numberOrZero(b.ranking))
+        .slice(0, 5);
+
+      state.topGuildNames = serverGuilds
+        .map((guild) => guild.guild_name)
+        .filter(Boolean);
+
+      elements.guildList.innerHTML = "";
+
+      if (serverGuilds.length === 0) {
+        elements.guildList.innerHTML =
+          '<div class="empty-guild">이 서버의 결사 랭킹 데이터가 없습니다.</div>';
+        return;
+      }
+
+      serverGuilds.forEach((guild) => {
+        const row = document.createElement("div");
+        row.className = "guild-row";
+        row.dataset.guild = guild.guild_name || "";
+
+        row.innerHTML = `
+          <div class="guild-rank">${escapeHtml(guild.ranking ?? "-")}</div>
+          <div>
+            <div class="guild-name">${escapeHtml(guild.guild_name || "-")}</div>
+            <div class="guild-sub">
+              결사장 ${escapeHtml(guild.guild_master || "-")}
+            </div>
+          </div>
+          <div class="guild-cell">
+            <span>결사원</span>
+            ${escapeHtml(guild.guild_member_count ?? "-")}
+            /
+            ${escapeHtml(guild.max_guild_member_count ?? "-")}
+          </div>
+          <div class="guild-cell">
+            <span>레벨</span>
+            ${escapeHtml(guild.guild_level ?? "-")}
+          </div>
+        `;
+
+        row.addEventListener("click", () => {
+          const clickedGuild = guild.guild_name || null;
+          const isSameGuild = state.selectedGuild === clickedGuild;
+
+          state.selectedGuild = isSameGuild ? null : clickedGuild;
+          elements.selectedGuildOnly.disabled = !state.selectedGuild;
+
+          if (!state.selectedGuild) {
+            elements.selectedGuildOnly.checked = false;
+          }
+
+          document.querySelectorAll(".guild-row").forEach((item) => {
+            item.classList.toggle(
+              "selected",
+              Boolean(state.selectedGuild) &&
+              item.dataset.guild === state.selectedGuild
+            );
+          });
+
+          renderRanking();
+        });
+
+        elements.guildList.appendChild(row);
+      });
+    }
+
+    function getVisiblePlayers() {
+      let players = state.characters.filter(
+        (player) => player.world === state.currentWorld
+      );
+
+      players.sort(
+        (a, b) => numberOrZero(a.ranking) - numberOrZero(b.ranking)
+      );
+
+      if (state.activeClass !== "전체") {
+        players = players.filter(
+          (player) => getClassName(player.class) === state.activeClass
+        );
+      }
+
+      if (
+        elements.selectedGuildOnly.checked &&
+        state.selectedGuild
+      ) {
+        players = players.filter(
+          (player) => player.guild === state.selectedGuild
+        );
+      }
+
+      return players.slice(0, 10);
+    }
+
+    function renderRanking() {
+      if (!state.currentWorld) {
+        renderEmptyRanking("서버 코드를 검색해 주세요.");
+        return;
+      }
+
+      const players = getVisiblePlayers();
+      elements.rankingBody.innerHTML = "";
+
+      if (players.length === 0) {
+        renderEmptyRanking("조건에 맞는 랭킹 데이터가 없습니다.");
+        return;
+      }
+
+      players.forEach((player, index) => {
+        const className = getClassName(player.class);
+        const isTopGuild = state.topGuildNames.includes(player.guild);
+        const isSelectedGuild =
+          Boolean(state.selectedGuild) &&
+          player.guild === state.selectedGuild;
+
+        const row = document.createElement("tr");
+
+        if (isSelectedGuild) {
+          row.classList.add("selected-guild");
+        }
+
+        row.innerHTML = `
+          <td>${index + 1}</td>
+          <td class="player-name">${escapeHtml(player.name || "-")}</td>
+          <td class="center">${escapeHtml(className)}</td>
+          <td class="center">
+            ${
+              player.guild
+                ? `<span class="guild-badge">${escapeHtml(player.guild)}</span>`
+                : "-"
+            }
+          </td>
+          <td class="center">${escapeHtml(player.level ?? "-")}</td>
+          <td class="center">${escapeHtml(player.grade ?? "-")}</td>
+          <td class="center">
+            ${
+              isTopGuild
+                ? '<span class="candidate-badge">유력 후보</span>'
+                : "-"
+            }
+          </td>
+        `;
+
+        elements.rankingBody.appendChild(row);
+      });
+    }
+
+    function renderEmptyRanking(message) {
+      elements.rankingBody.innerHTML = `
+        <tr class="empty-row">
+          <td colspan="7">${escapeHtml(message)}</td>
+        </tr>
+      `;
+    }
+
+    elements.searchBtn.addEventListener("click", searchServer);
+
+    elements.serverCode.addEventListener("keydown", (event) => {
+      if (event.key === "Enter") {
+        searchServer();
+      }
+    });
+
+    elements.serverCode.addEventListener("input", (event) => {
+      event.target.value = event.target.value
+        .toUpperCase()
+        .replace(/[^A-Z]/g, "")
+        .slice(0, 2);
+    });
+
+    elements.selectedGuildOnly.addEventListener("change", renderRanking);
+
+    createClassTabs();
+    loadData();
+  </script>
+</body>
+</html>
