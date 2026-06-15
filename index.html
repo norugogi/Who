@@ -107,6 +107,9 @@
     .subtitle { margin-top: 5px; color: #c8c3b8; font-size: 14px; }
 
     .update {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
       color: var(--text-soft);
       font-size: 13px;
       line-height: 1.7;
@@ -607,8 +610,14 @@
     @media (max-width: 760px) {
       body { padding: 0; }
       .title-row { flex-direction: column; }
-      .update { text-align: left; }
-      .support-btn { display: flex; width: fit-content; }
+      .update {
+        align-items: flex-start;
+        text-align: left;
+      }
+      .support-btn {
+        display: flex;
+        width: fit-content;
+      }
       .topbar, .content { padding: 12px; }
       .guild-row { grid-template-columns: 42px minmax(0,1fr) 90px 68px; }
       .tabs { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); }
@@ -633,7 +642,7 @@
 
         <div class="update">
           데이터 상태 <strong id="dataStatus">불러오는 중</strong><br />
-          불러온 시각 <span id="loadedTime">-</span>
+          불러온 시각 <span id="loadedTime">-</span><br />
           <a
             class="support-btn"
             href="https://creators.nexon.com/kr/s/KKOKKO0906%232342"
