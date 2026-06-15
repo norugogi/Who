@@ -54,7 +54,7 @@
 
     .topbar {
       position: relative;
-      padding: 18px 26px 20px;
+      padding: 16px 24px 16px;
       border-bottom: 1px solid #3b3931;
       background: linear-gradient(90deg, rgba(34,35,32,.96), rgba(26,27,25,.88));
     }
@@ -81,13 +81,11 @@
 
     .brand-mark {
       display: grid;
-      width: 52px;
-      height: 52px;
+      width: 50px;
+      height: 50px;
       place-items: center;
-      overflow: hidden;
-      border: 1px solid var(--gold);
-      background: #1b1c1a;
-      box-shadow: inset 0 0 0 3px rgba(0,0,0,.25);
+      overflow: visible;
+      flex: 0 0 auto;
     }
 
     .brand-mark img {
@@ -95,6 +93,7 @@
       width: 100%;
       height: 100%;
       object-fit: contain;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,.45));
     }
 
     h1 {
@@ -107,42 +106,48 @@
     .subtitle { margin-top: 5px; color: #c8c3b8; font-size: 14px; }
 
     .update {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
       color: var(--text-soft);
       font-size: 13px;
-      line-height: 1.7;
+      line-height: 1.65;
       text-align: right;
+      white-space: nowrap;
     }
 
     .update strong { color: var(--gold-bright); }
     .update .error { color: var(--danger); }
 
+    .subtitle-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 5px;
+      flex-wrap: wrap;
+    }
+
+    .subtitle-row .subtitle {
+      margin-top: 0;
+    }
+
     .support-btn {
       display: inline-flex;
-      min-width: 172px;
-      height: 34px;
+      height: 28px;
       align-items: center;
       justify-content: center;
-      margin-top: 10px;
-      padding: 0 14px;
-      border: 1px solid #8d7446;
-      background: linear-gradient(#5f4b30, #382b1d);
-      color: #f4e5bb;
-      font-size: 13px;
-      font-weight: 700;
+      padding: 0 11px;
+      border: 1px solid #75613d;
+      background: linear-gradient(#493a26, #302719);
+      color: #e9d49c;
+      font-size: 12px;
+      font-weight: 600;
       line-height: 1;
       text-decoration: none;
-      box-shadow:
-        inset 0 1px rgba(255,255,255,.08),
-        0 1px 0 rgba(0,0,0,.8);
+      white-space: nowrap;
     }
 
     .support-btn:hover {
-      border-color: #b49759;
-      background: linear-gradient(#71593a, #433322);
-      color: #fff7df;
+      border-color: #a38850;
+      background: linear-gradient(#5b482e, #3a2e1d);
+      color: #fff1c8;
     }
 
     .lab-en {
@@ -155,7 +160,7 @@
       display: grid;
       grid-template-columns: minmax(480px, 1fr) minmax(420px, .9fr);
       gap: 18px;
-      margin-top: 16px;
+      margin-top: 12px;
     }
 
     .search-block {
@@ -610,14 +615,8 @@
     @media (max-width: 760px) {
       body { padding: 0; }
       .title-row { flex-direction: column; }
-      .update {
-        align-items: flex-start;
-        text-align: left;
-      }
-      .support-btn {
-        display: flex;
-        width: fit-content;
-      }
+      .update { text-align: left; }
+      .subtitle-row { align-items: flex-start; }
       .topbar, .content { padding: 12px; }
       .guild-row { grid-template-columns: 42px minmax(0,1fr) 90px 68px; }
       .tabs { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); }
@@ -636,19 +635,21 @@
           <div class="brand-mark"><img src="bi_simbol.png" alt="노루 프라시아 연구소 심볼" /></div>
           <div>
             <h1>노루 프라시아 연구소</h1>
-            <div class="subtitle"><span class="lab-en">Noru Prasia Lab</span> · 서버 코드 기반 캐릭터 · 결사 랭킹 탐색 도구</div>
+            <div class="subtitle-row">
+              <div class="subtitle"><span class="lab-en">Noru Prasia Lab</span> · 서버 코드 기반 캐릭터 · 결사 랭킹 탐색 도구</div>
+              <a
+                class="support-btn"
+                href="https://creators.nexon.com/kr/s/KKOKKO0906%232342"
+                target="_blank"
+                rel="noopener noreferrer"
+              >맛나는꼬꼬 후원하기</a>
+            </div>
           </div>
         </div>
 
         <div class="update">
           데이터 상태 <strong id="dataStatus">불러오는 중</strong><br />
-          불러온 시각 <span id="loadedTime">-</span><br />
-          <a
-            class="support-btn"
-            href="https://creators.nexon.com/kr/s/KKOKKO0906%232342"
-            target="_blank"
-            rel="noopener noreferrer"
-          >맛나는꼬꼬 후원하기</a>
+          불러온 시각 <span id="loadedTime">-</span>
         </div>
       </div>
 
