@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="color-scheme" content="dark" />
-  <title>너 누구야</title>
+  <title>노루 프라시아 연구소</title>
 
   <style>
     @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap");
@@ -81,14 +81,20 @@
 
     .brand-mark {
       display: grid;
-      width: 42px;
-      height: 42px;
+      width: 52px;
+      height: 52px;
       place-items: center;
+      overflow: hidden;
       border: 1px solid var(--gold);
       background: #1b1c1a;
-      color: var(--gold-bright);
-      font-size: 22px;
       box-shadow: inset 0 0 0 3px rgba(0,0,0,.25);
+    }
+
+    .brand-mark img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
     }
 
     h1 {
@@ -109,6 +115,38 @@
 
     .update strong { color: var(--gold-bright); }
     .update .error { color: var(--danger); }
+
+    .support-btn {
+      display: inline-flex;
+      min-width: 172px;
+      height: 34px;
+      align-items: center;
+      justify-content: center;
+      margin-top: 10px;
+      padding: 0 14px;
+      border: 1px solid #8d7446;
+      background: linear-gradient(#5f4b30, #382b1d);
+      color: #f4e5bb;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1;
+      text-decoration: none;
+      box-shadow:
+        inset 0 1px rgba(255,255,255,.08),
+        0 1px 0 rgba(0,0,0,.8);
+    }
+
+    .support-btn:hover {
+      border-color: #b49759;
+      background: linear-gradient(#71593a, #433322);
+      color: #fff7df;
+    }
+
+    .lab-en {
+      color: var(--gold);
+      font-weight: 600;
+      letter-spacing: .2px;
+    }
 
     .search-area {
       display: grid;
@@ -570,6 +608,7 @@
       body { padding: 0; }
       .title-row { flex-direction: column; }
       .update { text-align: left; }
+      .support-btn { display: flex; width: fit-content; }
       .topbar, .content { padding: 12px; }
       .guild-row { grid-template-columns: 42px minmax(0,1fr) 90px 68px; }
       .tabs { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); }
@@ -585,16 +624,22 @@
     <header class="topbar">
       <div class="title-row">
         <div class="brand">
-          <div class="brand-mark">?</div>
+          <div class="brand-mark"><img src="bi_simbol.png" alt="노루 프라시아 연구소 심볼" /></div>
           <div>
-            <h1>너 누구야</h1>
-            <div class="subtitle">서버 코드 기반 캐릭터 · 결사 랭킹 탐색 도구</div>
+            <h1>노루 프라시아 연구소</h1>
+            <div class="subtitle"><span class="lab-en">Noru Prasia Lab</span> · 서버 코드 기반 캐릭터 · 결사 랭킹 탐색 도구</div>
           </div>
         </div>
 
         <div class="update">
           데이터 상태 <strong id="dataStatus">불러오는 중</strong><br />
           불러온 시각 <span id="loadedTime">-</span>
+          <a
+            class="support-btn"
+            href="https://creators.nexon.com/kr/s/KKOKKO0906%232342"
+            target="_blank"
+            rel="noopener noreferrer"
+          >맛나는꼬꼬 후원하기</a>
         </div>
       </div>
 
